@@ -53,7 +53,7 @@
         "https://unique-electronics.vercel.app/assets/hero.webp"
       ],
       "priceRange": "$$",
-      "telephone": "+919236603172",
+      "telephone": "+919415242951",
       "url": "https://unique-electronics.vercel.app",
       "address": {
         "@type": "PostalAddress",
@@ -97,9 +97,12 @@
   <header class="main-header" id="main-header">
     <div class="container nav-container">
       <a href="#hero" class="logo-link" id="logo-link">
-        <!-- Bolt Icon SVG -->
-        <svg class="logo-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 2L2 14h10l-2 8 10-12H12l2-8z"/>
+        <!-- Premium SVG Logo: Intersecting lightbulb and lightning bolt -->
+        <svg class="logo-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" opacity="0.3" />
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7z"/>
+          <path d="M9 21h6"/>
+          <path d="M12 6l-3 4.5h4L11 15" stroke-width="1.5" />
         </svg>
         <span class="logo-text">Unique Electronics</span>
       </a>
@@ -157,11 +160,11 @@
           <p class="hero-description" data-translate="hero-description">We provide premium-quality electrical essentials, home cooling solutions, and smart appliances from leading brands. Build your product list below and get a custom quote on WhatsApp instantly!</p>
           <div class="hero-ctas">
             <a href="#products" class="btn btn-primary" id="cta-browse" data-translate="cta-browse">Browse Products</a>
-            <a href="https://wa.me/919236603172?text=Hello%20Unique%20Electronics%2C%20I%20want%20to%20send%20a%20photo%20of%20my%20list%20(parcha)%20for%20a%20quote." target="_blank" rel="noopener noreferrer" class="btn btn-parcha" id="cta-parcha">
+            <a href="#" class="btn btn-parcha" id="cta-parcha">
               <svg class="parcha-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
               </svg>
-              <span data-translate="cta-parcha">Upload Parcha (WhatsApp)</span>
+              <span data-translate="cta-parcha">Upload List (WhatsApp)</span>
             </a>
             <a href="#contact" class="btn btn-secondary" id="cta-contact" data-translate="cta-contact">Visit Store</a>
           </div>
@@ -746,7 +749,7 @@
               </div>
               <div class="contact-details">
                 <h3 data-translate="contact-phone-title">Phone &amp; Mobile</h3>
-                <p><a href="tel:+919236603172" id="phone-link">+91&nbsp;92366&nbsp;03172</a> (<span data-translate="contact-phone-tap">Tap to call</span>)</p>
+                <p><a href="tel:+919415242951" id="phone-link">+91&nbsp;94152&nbsp;42951</a> (<span data-translate="contact-phone-tap">Tap to call</span>)</p>
               </div>
             </div>
 
@@ -830,6 +833,12 @@
 
       <!-- Selected items will be rendered here -->
       <ul class="selected-items-list" id="selected-items-list"></ul>
+
+      <!-- Custom Query Field (only visible when basket is not empty) -->
+      <div class="custom-query-wrapper" id="custom-query-wrapper" style="display: none;">
+        <label for="custom-query-input" data-translate="drawer-query-label">Add a custom note or query (optional):</label>
+        <textarea id="custom-query-input" rows="3" placeholder="e.g., Do you have Syska smart bulbs in stock? Or any special delivery requests..." data-translate-placeholder="drawer-query-placeholder"></textarea>
+      </div>
     </div>
 
     <div class="drawer-footer">
@@ -849,7 +858,13 @@
   <footer class="main-footer" id="main-footer">
     <div class="container footer-content">
       <a href="#hero" class="logo-link footer-logo-link">
-        <svg class="logo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 14h10l-2 8 10-12H12l2-8z"/></svg>
+        <!-- Premium SVG Logo: Intersecting lightbulb and lightning bolt -->
+        <svg class="logo-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" opacity="0.3" />
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7z"/>
+          <path d="M9 21h6"/>
+          <path d="M12 6l-3 4.5h4L11 15" stroke-width="1.5" />
+        </svg>
         <span class="logo-text" data-translate="footer-logo">Unique Electronics &amp; Electricals</span>
       </a>
       <ul class="footer-nav">

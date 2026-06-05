@@ -32,9 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectedItemsList = document.getElementById('selected-items-list');
   const sendWhatsAppBtn = document.getElementById('send-whatsapp-btn');
   const langToggleBtn = document.getElementById('lang-toggle');
+  const customQueryWrapper = document.getElementById('custom-query-wrapper');
+  const customQueryInput = document.getElementById('custom-query-input');
 
   // --- State Management ---
-  const WHATSAPP_NUMBER = '919236603172';
+  const WHATSAPP_NUMBER = '919415242951';
   let quoteBasket = []; // Array of { name, category, quantity }
 
   // --- Translation Dictionary ---
@@ -47,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'hero-title': 'Your Trusted <span>Electronics &amp; Electrical</span> Store in Khalilabad',
       'hero-description': 'We provide premium-quality electrical essentials, home cooling solutions, and smart appliances from leading brands. Build your product list below and get a custom quote on WhatsApp instantly!',
       'cta-browse': 'Browse Products',
-      'cta-parcha': 'Upload Parcha (WhatsApp)',
+      'cta-parcha': 'Upload List (WhatsApp)',
       'cta-contact': 'Visit Store',
       'features-heading': 'Why Choose Us?',
       'features-subheading': 'Delivering quality, reliability, and excellent customer service to Khalilabad homes and businesses.',
@@ -94,7 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
       'footer-address': 'Opposite MA Inter College, Mohaddipur, Khalilabad, UP',
       'drawer-title': 'Quote Basket',
       'drawer-empty': 'Your basket is empty. Browse the catalog and add products you\'d like to query!',
-      'drawer-btn': 'Request Quote on WhatsApp'
+      'drawer-btn': 'Request Quote on WhatsApp',
+      'drawer-query-label': 'Add a custom note or query (optional):',
+      'drawer-query-placeholder': 'e.g., Do you have Syska smart bulbs in stock? Or any special delivery requests...'
     },
     hi: {
       'nav-home': 'मुख्य पृष्ठ',
@@ -151,7 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
       'footer-address': 'एम.ए. इंटर कॉलेज के सामने, मोहद्दीपुर, खलीलाबाद, यूपी',
       'drawer-title': 'कोट बास्केट',
       'drawer-empty': 'आपकी बास्केट खाली है। कैटलॉग देखें और उन उत्पादों को जोड़ें जिनके लिए आप पूछताछ करना चाहते हैं!',
-      'drawer-btn': 'व्हाट्सएप पर कोट मांगें'
+      'drawer-btn': 'व्हाट्सएप पर कोट मांगें',
+      'drawer-query-label': 'कोई अतिरिक्त नोट या प्रश्न जोड़ें (वैकल्पिक):',
+      'drawer-query-placeholder': 'जैसे, क्या आपके पास सिस्का स्मार्ट बल्ब स्टॉक में हैं? या कोई विशेष अनुरोध...'
     }
   };
 
@@ -407,12 +413,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (quoteBasket.length === 0) {
       emptyDrawerState.style.display = 'block';
       selectedItemsList.style.display = 'none';
+      if (customQueryWrapper) customQueryWrapper.style.display = 'none';
       sendWhatsAppBtn.disabled = true;
       return;
     }
 
     emptyDrawerState.style.display = 'none';
     selectedItemsList.style.display = 'flex';
+    if (customQueryWrapper) customQueryWrapper.style.display = 'flex';
     sendWhatsAppBtn.disabled = false;
 
     // Render list elements
@@ -566,6 +574,14 @@ document.addEventListener('DOMContentLoaded', () => {
     quoteBasket.forEach((item, index) => {
       messageText += `${index + 1}. *${item.name}* (Qty: ${item.quantity}) - ${item.category}\n`;
     });
+
+    // Append custom query/note if present
+    const customQueryVal = customQueryInput ? customQueryInput.value.trim() : '';
+    if (customQueryVal) {
+      messageText += currentLang === 'en'
+        ? `\n*Custom Query/Note:*\n"${customQueryVal}"\n`
+        : `\n*अतिरिक्त प्रश्न/नोट:*\n"${customQueryVal}"\n`;
+    }
     
     messageText += currentLang === 'en'
       ? '\nPlease let me know when I can get a quote or visit. Thank you!'
@@ -576,6 +592,19 @@ document.addEventListener('DOMContentLoaded', () => {
     
     window.open(waUrl, '_blank', 'noopener,noreferrer');
   });
+
+  // Handle Parcha (Handwritten List) Upload CTA Click
+  const ctaParcha = document.getElementById('cta-parcha');
+  if (ctaParcha) {
+    ctaParcha.addEventListener('click', (e) => {
+      e.preventDefault();
+      const text = currentLang === 'en'
+        ? 'Hello Unique Electronics, I want to share a photo of my electrical items list for a quote.'
+        : 'नमस्ते यूनिक इलेक्ट्रॉनिक्स, मैं कोट के लिए अपने इलेक्ट्रिकल सामानों की सूची (पर्चा) का एक फोटो साझा करना चाहता हूँ।';
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    });
+  }
 
   // ==========================================
   // 8. Scroll Animation Fallback (IntersectionObserver)

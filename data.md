@@ -150,7 +150,7 @@ With a strong reputation for quality products and dependable service, Unique Ele
 
 📍 Opposite MA Inter College, Mohaddipur, Khalilabad, Uttar Pradesh – 272175
 
-📞 +91 92366 03172
+📞 +91 94152 42951
 
 ### Store Hours
 
