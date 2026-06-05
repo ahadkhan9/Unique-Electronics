@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
   <!-- SEO Meta Tags -->
   <title>Unique Electronics &amp; Electricals | Khalilabad Store</title>
   <meta name="description" content="Unique Electronics &amp; Electricals in Mohaddipur, Khalilabad, UP is your trusted local store for modular switches, wiring, energy-saving LED lighting, smart ceiling fans, home appliances, and audio accessories. Request a custom quote on WhatsApp.">
@@ -32,7 +35,12 @@
   <!-- Theme Initialization Script (Prevents Flash of Unstyled Theme - FOUC) -->
   <script>
     (function() {
-      const savedTheme = localStorage.getItem('theme');
+      let savedTheme = null;
+      try {
+        savedTheme = localStorage.getItem('theme');
+      } catch (e) {
+        console.warn('LocalStorage is not accessible for theme initialization.', e);
+      }
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = savedTheme || (prefersDark ? 'dark' : 'light');
       document.documentElement.classList.add(theme + '-theme');

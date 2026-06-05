@@ -162,11 +162,20 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // --- Translation State Management ---
-  let currentLang = localStorage.getItem('lang') || 'en';
+  let currentLang = 'en';
+  try {
+    currentLang = localStorage.getItem('lang') || 'en';
+  } catch (e) {
+    console.warn('LocalStorage is not accessible for reading language.', e);
+  }
 
   const setLanguage = (lang) => {
     currentLang = lang;
-    localStorage.setItem('lang', lang);
+    try {
+      localStorage.setItem('lang', lang);
+    } catch (e) {
+      console.warn('LocalStorage is not accessible for writing language.', e);
+    }
     langToggleBtn.textContent = lang === 'en' ? 'HI' : 'EN';
     langToggleBtn.setAttribute('aria-label', lang === 'en' ? 'Switch language to Hindi' : 'अंग्रेजी में बदलें');
 
@@ -187,7 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Refresh store opening hours display text
-    updateStoreStatus();
+    if (typeof updateStoreStatus === 'function') {
+      updateStoreStatus();
+    }
   };
 
   langToggleBtn.addEventListener('click', () => {
@@ -208,7 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.classList.add(`${theme}-theme`);
     document.documentElement.setAttribute('data-theme', theme);
     document.querySelector('meta[name="color-scheme"]').setAttribute('content', theme === 'dark' ? 'dark' : 'light');
-    localStorage.setItem('theme', theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {
+      console.warn('LocalStorage is not accessible for setting theme.', e);
+    }
   };
 
   // Theme Toggle Button Click Handler
@@ -220,7 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Listen for system appearance changes if user hasn't set a preference
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
+    let hasSavedTheme = false;
+    try {
+      hasSavedTheme = !!localStorage.getItem('theme');
+    } catch (err) {}
+    if (!hasSavedTheme) {
       setTheme(e.matches ? 'dark' : 'light');
     }
   });
@@ -634,4 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
       revealObserver.observe(el);
     });
   }
+
+  // Set initial language at the very end of init
+  setLanguage(currentLang);
 });
