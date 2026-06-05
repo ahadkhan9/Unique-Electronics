@@ -164,9 +164,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Translation State Management ---
   let currentLang = 'en';
   try {
-    currentLang = localStorage.getItem('lang') || 'en';
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang === 'en' || savedLang === 'hi') {
+      currentLang = savedLang;
+    } else {
+      // If no manually saved language preference, detect browser default language
+      const browserLang = navigator.language || (navigator.languages && navigator.languages[0]) || '';
+      if (browserLang.toLowerCase().startsWith('hi')) {
+        currentLang = 'hi';
+      }
+    }
   } catch (e) {
     console.warn('LocalStorage is not accessible for reading language.', e);
+    // Fallback detection if localStorage is blocked
+    const browserLang = navigator.language || (navigator.languages && navigator.languages[0]) || '';
+    if (browserLang.toLowerCase().startsWith('hi')) {
+      currentLang = 'hi';
+    }
   }
 
   const setLanguage = (lang) => {
