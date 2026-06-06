@@ -148,7 +148,7 @@ With a strong reputation for quality products and dependable service, Unique Ele
 
 ### Store Information
 
-📍 Opposite MA Inter College, Mohaddipur, Khalilabad, Uttar Pradesh – 272175
+📍 Opp. Maulana Azad Inter College, Mehdawal Road, Khalilabad, Uttar Pradesh – 272175
 
 📞 +91 94152 42951
 
